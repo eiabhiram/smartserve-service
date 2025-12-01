@@ -1,0 +1,13 @@
+package com.smartops.smartserve.constants;
+
+public enum SSCameraEvent {
+
+	PERSON_DETECTED, PERSON_NOT_DETECTED,
+
+	GLASS_DETECTED, GLASS_EMPTY,
+
+	FOOD_DETECTED, FOOD_FINISHED,
+
+	NO_FEED, LOW_CONFIDENCE
+
+}

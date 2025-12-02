@@ -9,7 +9,7 @@ public class SSCameraEventRequest {
 	
 	private Long tableId;
 	
-    private String event;  
+    private String action;  
     
     private double confidence;
 

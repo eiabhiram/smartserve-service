@@ -6,12 +6,13 @@ import java.util.Optional;
 import com.smartops.smartserve.domain.SSTableState;
 import com.smartops.smartserve.model.SSCameraEventRequest;
 import com.smartops.smartserve.model.SSCustomerEventRequest;
-import com.smartops.smartserve.model.SSTableUpdatePayload;
+import com.smartops.smartserve.model.SSTableStateDTO;
 import com.smartops.smartserve.model.SSWaiterActionRequest;
+import com.smartops.smartserve.model.ws.SSTableUpdatePayload;
 
 public interface SSTableService {
 
-	SSTableUpdatePayload createTable();
+	SSTableUpdatePayload createTable(SSTableStateDTO ssTableStateDTO);
 
 	SSTableUpdatePayload processCameraEvent(SSCameraEventRequest req);
 

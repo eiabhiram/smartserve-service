@@ -13,8 +13,9 @@ import com.smartops.smartserve.events.realtime.SSRealtimeUpdate;
 import com.smartops.smartserve.mapper.SSStateMachineMapper;
 import com.smartops.smartserve.model.SSCameraEventRequest;
 import com.smartops.smartserve.model.SSCustomerEventRequest;
-import com.smartops.smartserve.model.SSTableUpdatePayload;
+import com.smartops.smartserve.model.SSTableStateDTO;
 import com.smartops.smartserve.model.SSWaiterActionRequest;
+import com.smartops.smartserve.model.ws.SSTableUpdatePayload;
 import com.smartops.smartserve.repository.SSEventLogRepository;
 import com.smartops.smartserve.repository.SSTableStateRepository;
 import com.smartops.smartserve.service.SSTableService;
@@ -32,9 +33,15 @@ public class SSTableServiceImpl implements SSTableService {
 	@Transactional
 	@Override
 	@SSRealtimeUpdate(topic = "table", operation = SSRealtimeOperation.CREATE)
-	public SSTableUpdatePayload createTable() {
+	public SSTableUpdatePayload createTable(SSTableStateDTO ssTableStateDTO) {
 		SSTableState state = new SSTableState();
 		state.setTableStatus(SSTableStatus.FREE); // default state
+		state.setTableName(ssTableStateDTO.getTableName());
+		state.setChairCount(ssTableStateDTO.getChairCount());
+		state.setIsActive(true);
+		state.setIsReserved(false);
+		state.setTableName(ssTableStateDTO.getTableName());
+		state.setTableName(ssTableStateDTO.getTableName());
 		SSTableState saved = tableRepo.save(state);
 		logEvent(saved.getId(), "TABLE_CREATED", 0);
 		return new SSTableUpdatePayload(saved.getId(), saved.getTableStatus().name(), saved.getLastEvent());
@@ -44,22 +51,16 @@ public class SSTableServiceImpl implements SSTableService {
 	@Override
 	@SSRealtimeUpdate(topic = "table", operation = SSRealtimeOperation.UPDATE)
 	public SSTableUpdatePayload processCameraEvent(SSCameraEventRequest req) {
-		return processEvent(req.getTableId(), req.getEvent(), req.getConfidence());
+		return processEvent(req.getTableId(), req.getAction(), req.getConfidence());
 	}
 
-	/**
-	 * Customer → UPDATE
-	 */
 	@Transactional
 	@Override
 	@SSRealtimeUpdate(topic = "table", operation = SSRealtimeOperation.UPDATE)
 	public SSTableUpdatePayload processCustomerEvent(SSCustomerEventRequest req) {
-		return processEvent(req.getTableId(), req.getEvent(), 1.0);
+		return processEvent(req.getTableId(), req.getAction(), 1.0);
 	}
 
-	/**
-	 * Waiter → UPDATE
-	 */
 	@Transactional
 	@Override
 	@SSRealtimeUpdate(topic = "table", operation = SSRealtimeOperation.UPDATE)

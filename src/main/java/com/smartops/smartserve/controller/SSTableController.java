@@ -12,8 +12,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.smartops.smartserve.domain.SSTableState;
 import com.smartops.smartserve.model.SSTableActionRequest;
-import com.smartops.smartserve.model.SSTableUpdatePayload;
+import com.smartops.smartserve.model.SSTableStateDTO;
 import com.smartops.smartserve.model.SSWaiterActionRequest;
+import com.smartops.smartserve.model.ws.SSTableUpdatePayload;
 import com.smartops.smartserve.service.SSTableService;
 
 import lombok.RequiredArgsConstructor;
@@ -26,8 +27,8 @@ public class SSTableController {
 	private final SSTableService tableService;
 
 	@PostMapping()
-	public ResponseEntity<?> createTable() {
-		SSTableUpdatePayload payload = tableService.createTable();
+	public ResponseEntity<?> createTable(@RequestBody SSTableStateDTO ssTableStateDTO) {
+		SSTableUpdatePayload payload = tableService.createTable(ssTableStateDTO);
 		return ResponseEntity.ok(payload);
 	}
 

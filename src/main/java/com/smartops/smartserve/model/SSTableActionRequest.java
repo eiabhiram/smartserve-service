@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SSTableActionRequest {
-	
-	private Long tableId;
-	
-	private String action;
 
+	private Long tableId;
+
+	private String action;
+	
 }

@@ -5,9 +5,9 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SSCameraRequestEvent {
+public class SSCameraEventRequest {
 	
-	private Integer tableId;
+	private Long tableId;
 	
     private String event;  
     

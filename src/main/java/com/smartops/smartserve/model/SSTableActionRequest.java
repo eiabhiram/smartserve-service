@@ -5,10 +5,10 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class SSCustomerEventRequest {
-
+public class SSTableActionRequest {
+	
 	private Long tableId;
-
-	private String event;
+	
+	private String action;
 
 }

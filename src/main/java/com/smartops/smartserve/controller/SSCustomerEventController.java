@@ -21,6 +21,6 @@ public class SSCustomerEventController {
 	@PostMapping
 	public ResponseEntity<String> receiveCustomerEvent(@RequestBody SSCustomerEventRequest req) {
 		tableService.processCustomerEvent(req);
-		return ResponseEntity.ok("customer event processed");
+		return ResponseEntity.ok("Customer event processed");
 	}
 }

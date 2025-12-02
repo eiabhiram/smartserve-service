@@ -20,7 +20,7 @@ public class SSRealtimeAspect {
 
 	private final SSRealTimeNotificationService notificationService;
 
-	@AfterReturning(pointcut = "execution(* com.smartops.smartserve.service.impl.*.*(..)) && @annotation(com.smartops.smartserve.events.realtime.RealtimeUpdate)", returning = "returnedValue")
+	@AfterReturning(pointcut = "execution(* com.smartops.smartserve.service.impl.*.*(..)) && @annotation(com.smartops.smartserve.events.realtime.SSRealtimeUpdate)", returning = "returnedValue")
 	public void afterServiceMethod(JoinPoint jp, Object returnedValue) {
 		if (returnedValue == null)
 			return;

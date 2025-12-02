@@ -24,7 +24,7 @@ public class SSWebSocketConfig implements WebSocketConfigurer {
 		String[] origins = properties.getAllowedOrigins() == null ? new String[] { "*" }
 				: properties.getAllowedOrigins().split(",");
 
-		registry.addHandler(handler, "/api/realtime/events").setAllowedOrigins(origins)
+		registry.addHandler(handler, "/tables/events").setAllowedOrigins(origins)
 				.addInterceptors(new SSCustomHandshakeInterceptor());
 	}
 }

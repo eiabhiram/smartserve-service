@@ -15,6 +15,6 @@ public class SSTableState extends SSDomain {
 
 	private String lastEvent;
 
-	private String lastConfidence;
+	private double lastConfidence;
 
 }

@@ -9,10 +9,10 @@ import lombok.Setter;
 @Setter
 public class SSEventsLog extends SSDomain {
 
-	private Integer tableId;
+	private Long tableId;
 
-	private String event; // raw event (CameraEvent / CustomerEvent / WaiterAction)
+	private String event;
 
-	private double confidence; // optional for YOLO
+	private double confidence;
 
 }

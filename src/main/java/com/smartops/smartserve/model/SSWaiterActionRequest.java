@@ -6,9 +6,9 @@ import lombok.Setter;
 @Getter
 @Setter
 public class SSWaiterActionRequest {
-	
-	private Integer tableId;
 
-	private String event;
+	private Long tableId;
+
+	private String action;
 
 }

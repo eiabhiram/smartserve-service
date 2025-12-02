@@ -21,6 +21,6 @@ public class SSWaiterActionController {
 	@PostMapping
 	public ResponseEntity<String> receiveWaiterAction(@RequestBody SSWaiterActionRequest req) {
 		tableService.processWaiterAction(req);
-		return ResponseEntity.ok("waiter action processed");
+		return ResponseEntity.ok("Waiter action processed");
 	}
 }

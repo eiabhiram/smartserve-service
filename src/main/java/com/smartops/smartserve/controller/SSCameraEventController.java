@@ -16,11 +16,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class SSCameraEventController {
 
-    private final SSTableService tableService;
+	private final SSTableService tableService;
 
-    @PostMapping
-    public ResponseEntity<String> receiveCameraEvent(@RequestBody SSCameraEventRequest req) {
-        tableService.processCameraEvent(req);
-        return ResponseEntity.ok("camera event processed");
-    }
+	@PostMapping
+	public ResponseEntity<String> receiveCameraEvent(@RequestBody SSCameraEventRequest req) {
+		tableService.processCameraEvent(req);
+		return ResponseEntity.ok("Camera event processed");
+	}
 }

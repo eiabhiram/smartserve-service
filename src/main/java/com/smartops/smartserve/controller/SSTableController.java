@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.smartops.smartserve.domain.SSTableState;
 import com.smartops.smartserve.model.SSTableActionRequest;
+import com.smartops.smartserve.model.SSTableUpdatePayload;
 import com.smartops.smartserve.model.SSWaiterActionRequest;
 import com.smartops.smartserve.service.SSTableService;
 
@@ -23,6 +24,12 @@ import lombok.RequiredArgsConstructor;
 public class SSTableController {
 
 	private final SSTableService tableService;
+
+	@PostMapping()
+	public ResponseEntity<?> createTable() {
+		SSTableUpdatePayload payload = tableService.createTable();
+		return ResponseEntity.ok(payload);
+	}
 
 	@GetMapping
 	public List<SSTableState> allTables() {
@@ -48,6 +55,6 @@ public class SSTableController {
 		req.setAction(actionRequest.getAction());
 
 		tableService.processWaiterAction(req);
-		return ResponseEntity.ok("action applied");
+		return ResponseEntity.ok("Action applied");
 	}
 }

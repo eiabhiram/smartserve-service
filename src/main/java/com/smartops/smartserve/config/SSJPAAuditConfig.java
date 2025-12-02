@@ -13,17 +13,16 @@ public class SSJPAAuditConfig {
 
 	@Bean
 	public AuditorAware<String> auditorProvider() {
-		return new SSSpringSecurityAuditorAware();
+		return new SSAuditorAware();
 	}
 
 }
 
-class SSSpringSecurityAuditorAware implements AuditorAware<String> {
+class SSAuditorAware implements AuditorAware<String> {
 
 	@Override
 	public Optional<String> getCurrentAuditor() {
 		String user = "SmartOps";
 		return Optional.ofNullable(user);
-
 	}
 }

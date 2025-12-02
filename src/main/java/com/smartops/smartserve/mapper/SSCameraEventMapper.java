@@ -10,7 +10,7 @@ public class SSCameraEventMapper {
         return switch (event) {
 
             case PERSON_DETECTED -> SSTableStatus.OCCUPIED;
-            case PERSON_NOT_DETECTED -> SSTableStatus.NEEDS_CLEANING;
+//            case PERSON_NOT_DETECTED -> SSTableStatus.NEEDS_CLEANING;
 
             case GLASS_DETECTED -> SSTableStatus.ACTIVE;
             case GLASS_EMPTY -> SSTableStatus.NEEDS_WATER;

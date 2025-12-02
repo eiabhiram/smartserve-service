@@ -1,10 +1,9 @@
-package com.smartops.smartserve.domain;
+package com.smartops.smartserve.model;
 
 import java.time.LocalDateTime;
 
 import com.smartops.smartserve.constants.SSTableStatus;
 
-import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import lombok.Getter;
@@ -12,8 +11,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-@Entity
-public class SSTableState extends SSDomain {
+public class SSTableStateDTO {
 
 	private String tableName;
 

@@ -9,6 +9,6 @@ public class SSCustomerEventRequest {
 
 	private Long tableId;
 
-	private String event;
+	private String action;
 
 }

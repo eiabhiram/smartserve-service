@@ -1,9 +1,13 @@
 package com.smartops.smartserve.domain;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import com.smartops.smartserve.constants.SSTableStatus;
+import com.smartops.smartserve.mapper.SSCommonListMapper;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Convert;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -34,7 +38,9 @@ public class SSTableState extends SSDomain {
 	@Enumerated(EnumType.STRING)
 	private SSTableStatus tableStatus;
 
-	private String lastEvent;
+	@Column(nullable = true, columnDefinition = "nvarchar(max)")
+	@Convert(converter = SSCommonListMapper.class)
+	private List<String> lastEvent;
 
 	private double lastConfidence;
 

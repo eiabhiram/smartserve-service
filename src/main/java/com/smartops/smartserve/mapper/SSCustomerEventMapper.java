@@ -9,11 +9,9 @@ public class SSCustomerEventMapper {
 
 		return switch (event) {
 
-		case CALL_WAITER -> current; // waiter gets notification, state unchanged
+		case CALL_WAITER -> current;
 
-		case REQUEST_WATER -> SSTableStatus.NEEDS_WATER;
-
-		case REQUEST_BILL -> SSTableStatus.FOOD_FINISHED_STATE;
+		case REQUEST_WATER -> current;
 
 		default -> current;
 		};

@@ -1,5 +1,7 @@
 package com.smartops.smartserve.model.ws;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -13,6 +15,6 @@ public class SSTableUpdatePayload {
 
 	private String status;
 
-	private String lastEvent;
+	private List<String> lastEvent;
 
 }

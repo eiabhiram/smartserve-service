@@ -11,10 +11,6 @@ public class SSWaiterActionMapper {
 
 		case MARK_WATER_SERVED -> SSTableStatus.ACTIVE;
 
-		case MARK_FOOD_SERVED -> SSTableStatus.ACTIVE;
-
-		case MARK_CLEANING_STARTED -> SSTableStatus.NEEDS_CLEANING;
-
 		case MARK_TABLE_CLEANED -> SSTableStatus.FREE;
 
 		default -> current;

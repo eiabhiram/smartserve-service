@@ -24,4 +24,6 @@ public interface SSTableService {
 
 	Optional<SSTableState> get(Long tableId);
 
+	String getTableStatus(Long tableId);
+
 }

@@ -19,6 +19,9 @@ import com.smartops.smartserve.model.ws.SSTableUpdatePayload;
 import com.smartops.smartserve.repository.SSEventLogRepository;
 import com.smartops.smartserve.repository.SSTableStateRepository;
 import com.smartops.smartserve.service.SSTableService;
+import com.smartops.smartserve.service.validation.SSCameraEventValidationService;
+import com.smartops.smartserve.model.SSErrorModelDTO;
+import com.smartops.smartserve.exception.SSBusinessException;
 
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +32,7 @@ public class SSTableServiceImpl implements SSTableService {
 
 	private final SSTableStateRepository tableRepo;
 	private final SSEventLogRepository eventRepo;
+	private final SSCameraEventValidationService validationService;
 
 	@Transactional
 	@Override
@@ -51,6 +55,14 @@ public class SSTableServiceImpl implements SSTableService {
 	@Override
 	@SSRealtimeUpdate(topic = "table", operation = SSRealtimeOperation.UPDATE)
 	public SSTableUpdatePayload processCameraEvent(SSCameraEventRequest req) {
+		// Get current table status and validate the camera event before processing
+		String currentStatus = getTableStatus(req.getTableId());
+		SSErrorModelDTO validationError = validationService.validateCameraEvent(req, currentStatus);
+		
+		if (validationError != null) {
+			throw new SSBusinessException(validationError.getValidationMessage(), validationError.getArgs());
+		}
+		
 		return processEvent(req.getTableId(), req.getAction(), req.getConfidence());
 	}
 
@@ -76,6 +88,14 @@ public class SSTableServiceImpl implements SSTableService {
 	@Override
 	public Optional<SSTableState> get(Long tableId) {
 		return tableRepo.findById(tableId);
+	}
+
+	@Override
+	public String getTableStatus(Long tableId) {
+		return tableRepo.findById(tableId)
+			.map(SSTableState::getTableStatus)
+			.map(Enum::name)
+			.orElse("UNKNOWN");
 	}
 
 	private SSTableUpdatePayload processEvent(Long tableId, String event, double confidence) {
